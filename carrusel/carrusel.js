@@ -20,6 +20,8 @@ class Slider{
         this.estilo_animacion = estilo_animacion;
         this.auto = auto;
 
+        this.imageIdx = 0;
+
         this.setUpActions();
     }
 
@@ -33,13 +35,23 @@ class Slider{
 
     setSliderDimentions(){
         let sliderCanvas = document.querySelector(`#${this.id}`);
-        //definir width & height
+        //TAREA2: guardar ancho y alto
         console.log(sliderCanvas);
     }
 
     setSliderNav(){
         //document.createElement
         //appendChild
+
+        if(this.lista_elementos.length > 1){
+            //colocar flechas de navegación
+            document.querySelector(`#${this.id} .slider-nav`).style.display = 'block';
+        }
+        //TAREA1: dinamizar el tamaño del contenedor
+
+    }
+
+    setSliderImages(){
         console.log('qty: ', this.lista_elementos);
 
         this.lista_elementos.forEach( (Image) => { //bucle para leer imagen x imagen
@@ -49,18 +61,29 @@ class Slider{
             currentImage.setAttribute("height", "500");
             document.querySelector(`#${this.id} .slider-inner`).appendChild(currentImage);
         });
+    }
 
-        if(this.lista_elementos.length > 1){
-            //colocar flechas de navegación
-            document.querySelector(`#${this.id} .slider-nav`).style.display = 'block';
-        }
-        //TAREA: dinamizar el tamaño del contenedor
+    setSliderEvents(){
+        //definir click en boton izquierdo
+        //TAREA3: ESTABLECER CLICK  AL BOTON IZQUIERDO
+        document.querySelector(`#${this.id} .slider-nav-prev`).addEventListener('click', () => {
+            document.querySelector(`#${this.id} .slider-inner`).setAttribute('style', `left: -${(this.imageIdx -= 1) * 780}px`);
+        });
+        
+        //definir click en boton derecho
+        document.querySelector(`#${this.id} .slider-nav-next`).addEventListener('click', () => {
+            console.log('HIT NEXT!!!!');
+            //mover el contenedor - indice / width
+            document.querySelector(`#${this.id} .slider-inner`).setAttribute('style', `left: -${(this.imageIdx += 1) * 780}px`);
+            //TAREA4: validar el final de las imagenes
+
+        });
 
     }
 
-    setSliderImages(){/*CHUNK*/}
-
-    setSliderEvents(){/*CHUNK*/}
+    //TAREA5: HACERLO AUTOMATICO SI FUERA EXPLICITO.
+    //TAREA6: ESTABLECER EL PAGINADOR INFERIOR.
+    //TAREA7: ESTABLECER EL CLICK A CADA BOTONCITO DEL PAGINADOR.
 
     getImprimirInfo(){
         console.log(this.lista_elementos, 
